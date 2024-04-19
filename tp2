@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+
+int main() {
+    pid_t pid; // Variable para almacenar el ID del proceso
+
+    pid = fork(); // Crear un nuevo proceso
+
+    if (pid < 0) {
+        // Error al crear el proceso hijo
+        fprintf(stderr, "Error al crear el proceso hijo\n");
+        return 1;
+    } else if (pid == 0) {
+        // Código ejecutado por el proceso hijo
+        printf("Proceso hijo: PID = %d\n", getpid());
+        printf("Proceso hijo: PID del padre = %d\n", getppid());
+        printf("Proceso hijo: Hola, soy el proceso hijo!\n");
+    } else {
+        // Código ejecutado por el proceso padre
+        printf("Proceso padre: PID = %d\n", getpid());
+        printf("Proceso padre: PID del padre = %d\n", getppid());
+        printf("Proceso padre: Hola, soy el proceso padre!\n");
+    }
+
+    return 0;
+}
